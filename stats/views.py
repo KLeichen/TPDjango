@@ -26,12 +26,7 @@ def index(request):
 
 def graph(request):
     matplotlib.use('agg')
-    a = []
-    b = []
-    for i in teamData.objects.all():
-        a.append(i.teamName.name)
-        b.append(float(i.wins))
-    plt.bar(a, b)
+    
     fig = plt.gcf()
     buf = io.BytesIO()
     fig.savefig(buf,format='png')
@@ -39,5 +34,3 @@ def graph(request):
     string = base64.b64encode(buf.read())
     uri =  urllib.parse.quote(string)
     return render(request,'graph.html',{'data':uri})
-
-    
