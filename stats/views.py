@@ -5,8 +5,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import matplotlib
 import urllib3
-from stats.models import clubName, teamData
+from stats.models import clubName, teamData, ExtraData
 import matplotlib.pyplot as plt
+import random
 
 # Create your views here.
 def index(request):
@@ -26,7 +27,21 @@ def index(request):
 
 def graph(request):
     matplotlib.use('agg')
-    
+    shots_att = ExtraData.objects.all()
+    on_target_att = ExtraData.objects.all()
+    woodwork = ExtraData.objects.all()
+    count = 0
+    test_list = []
+    test_list2 = []
+    for shots in shots_att:
+        count += 1
+    for i in range(count):
+        test_list.append(random.randint(0,300))
+        test_list2.append(random.randint(0,300))
+    im = plt.imread('/Users/kevo/HTML/Git Repo/TPDjango/stats/templates/arco.jpeg')
+    implot = plt.imshow(im)
+    plt.scatter(test_list, test_list2)
+    plt.show
     fig = plt.gcf()
     buf = io.BytesIO()
     fig.savefig(buf,format='png')
