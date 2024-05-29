@@ -5,17 +5,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import matplotlib
 import urllib3
-from stats.models import clubName, teamData, ExtraData
+from stats.models import clubName, teamSeasonData, ExtraSeasonData
 import matplotlib.pyplot as plt
 import random
 
 # Create your views here.
 def index(request):
     name = clubName.objects.all()
-    wins = teamData.objects.all()
-    team = teamData.objects.all()
-    teamName = teamData.objects.all()
-    losses = teamData.objects.all()
+    wins = teamSeasonData.objects.all()
+    team = teamSeasonData.objects.all()
+    teamName = teamSeasonData.objects.all()
+    losses = teamSeasonData.objects.all()
     context = {
         "club": name,
         "wins": wins,
@@ -25,22 +25,23 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-def graph(request):
+def graph(request, team_name):
     matplotlib.use('agg')
-    shots_att = ExtraData.objects.all()
-    on_target_att = ExtraData.objects.all()
-    woodwork = ExtraData.objects.all()
+    shots_att = ExtraSeasonData.objects.get(on_target_att=100)
+    # shots_att = ExtraSeasonData.objects.get(on_target_att=team_name)
+    # on_target_att = ExtraSeasonData.objects.get(team_name)
+    # woodwork = ExtraSeasonData.objects.get(team_name)
     count = 0
     test_list = []
     test_list2 = []
     for shots in shots_att:
         count += 1
     for i in range(count):
-        test_list.append(random.randint(0,300))
-        test_list2.append(random.randint(0,300))
-    im = plt.imread('/Users/kevo/HTML/Git Repo/TPDjango/stats/templates/arco.jpeg')
+        test_list.append(random.randint(0, 500))
+        test_list2.append(random.randint(100,250))
+    im = plt.imread('/Users/kevo/HTML/Git Repo/TPDjango/stats/templates/SoccerGoal.jpeg')
     implot = plt.imshow(im)
-    plt.scatter(test_list, test_list2)
+    plt.scatter(test_list, test_list2, marker='x', color='red')
     plt.show
     fig = plt.gcf()
     buf = io.BytesIO()

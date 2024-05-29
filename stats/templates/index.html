@@ -1,6 +1,9 @@
-<ul>
-{% for n in teamName%}
-<li>{{ n.teamName }}: Wins: {{n.wins}} Losses: {{n.losses}} Goals: {{n.goals}}</li>
-<br>
-{% endfor %}
-</ul>
+<form  method="POST">{% csrf_token %}
+    <select name="teams" id='teams'>
+        <option disabled selected value> Choose a Team: </option>
+        {% for team in club %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+    </select>
+    <a href='graph.html'><input type='submit'></a>
+</form>

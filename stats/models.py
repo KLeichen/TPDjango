@@ -9,17 +9,18 @@ class clubName(models.Model):
     def __str__(self):
         return self.name
 
-class teamData(models.Model):
+class teamSeasonData(models.Model):
     wins = models.IntegerField()
     losses = models.IntegerField()
     goals = models.IntegerField()
+    season = models.CharField(max_length=255)
     teamName = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return "Wins: " + str(self.wins) + " losses: " + str(self.losses) + " goals: " + str(self.goals)
+        return "Wins: " + str(self.wins) + " losses: " + str(self.losses) + " goals: " + str(self.goals) + " Season: " + str(self.season)
     
 
-class ExtraData(models.Model):
+class ExtraSeasonData(models.Model):
     yel_cards = models.IntegerField()
     red_cards = models.IntegerField()
     shots_att = models.IntegerField()
@@ -64,9 +65,3 @@ class ExtraData(models.Model):
             + " Passes: " + str(self.passes) + " Long Balls: " + str(self.long_balls) + " Crosses: " + str(self.crosses) \
             + " Corners: " + str(self.corners) + " Touches: " + str(self.touches) + " Penalties Saved: " + str(self.penalties_saved)
 
-
-# class Season(models.Model):
-#     season = models.CharField(max_length=255)
-
-#     def __str__(self):
-#         return self.season

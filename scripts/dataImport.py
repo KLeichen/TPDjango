@@ -1,6 +1,6 @@
 import csv
 
-from stats.models import teamData, clubName, ExtraData
+from stats.models import teamSeasonData, clubName, ExtraSeasonData
 
 
 
@@ -10,23 +10,23 @@ def run():
         next(reader)
 
         clubName.objects.all().delete()
-        teamData.objects.all().delete()
-        ExtraData.objects.all().delete()
-        # Season.objects.all().delete()
+        teamSeasonData.objects.all().delete()
+        ExtraSeasonData.objects.all().delete()
 
         for row in reader:
 
             club_name, _ = clubName.objects.get_or_create(name=row[0])
-            # season_period, _ = Season.objects.get_or_create(season=row[41])
+            
 
-            team_data = teamData(
+            team_data = teamSeasonData(
                         wins=row[1],
                         losses=row[2],
                         goals=row[3],
+                        season = row[33],
                         teamName=club_name)
             team_data.save()
 
-            extra_data = ExtraData(
+            extra_data = ExtraSeasonData(
                         yel_cards=row[4],
                         red_cards=row[5],
                         shots_att=row[6],
@@ -58,7 +58,3 @@ def run():
                         penalties_saved=row[32],
                         teamName=club_name)
             extra_data.save()
-
-            # season = Season(
-            #     season=season_period)
-            # season.save()
