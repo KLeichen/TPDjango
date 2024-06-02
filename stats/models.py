@@ -5,6 +5,7 @@ from django.db import models
 
 class clubName(models.Model):
     name = models.CharField(max_length=255)
+    # image_link = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -14,10 +15,11 @@ class teamSeasonData(models.Model):
     losses = models.IntegerField()
     goals = models.IntegerField()
     season = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     teamName = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return "Wins: " + str(self.wins) + " losses: " + str(self.losses) + " goals: " + str(self.goals) + " Season: " + str(self.season)
+        return "Name: " + str(self.name) + " Wins: " + str(self.wins) + " losses: " + str(self.losses) + " goals: " + str(self.goals) + " Season: " + str(self.season)
     
 
 class ExtraSeasonData(models.Model):
@@ -64,4 +66,12 @@ class ExtraSeasonData(models.Model):
             + " Penalties Conceded: " + str(self.penalties_conceded) + " Goals From Penalties: " + str(self.goals_from_penalties) \
             + " Passes: " + str(self.passes) + " Long Balls: " + str(self.long_balls) + " Crosses: " + str(self.crosses) \
             + " Corners: " + str(self.corners) + " Touches: " + str(self.touches) + " Penalties Saved: " + str(self.penalties_saved)
+    
+
+class ImageLinks(models.Model):
+    image_link = models.URLField(max_length=255)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
