@@ -26,15 +26,15 @@ def run():
                         goals=row[3],
                         name=row[0],
                         season = row[33],
+                        shots_att=row[6],
+                        on_target_att=row[7],
+                        woodwork=row[8],
                         teamName=club_name)
             team_data.save()
 
             extra_data = ExtraSeasonData(
                         yel_cards=row[4],
                         red_cards=row[5],
-                        shots_att=row[6],
-                        on_target_att=row[7],
-                        woodwork=row[8],
                         header_goals=row[9],
                         penalty_goals=row[10],
                         freekick_goals=row[11],

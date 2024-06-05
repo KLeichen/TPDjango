@@ -1,56 +1,41 @@
-{% load static %}
-
 <DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Teams Cards </title>
     <link href="static/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="static/style.css">
-    <title> Teams Cards </title>
 </head>
-
 <body>
-    {% for teams in team %}
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{teams.name}}" aria-expanded="false" aria-controls="{{teams.name}}">
-        <div class="team-card">
-            <div class="card-content">
-                <div class="team-name">{{teams.name}}</div>
-                {% comment %} <img src="{{ img_link }}" alt="{{teams.name}}" class="team-logo"> {% endcomment %}
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+             <div class="container-fluid">
+                <a href="" class="logoContainer">
+                    <img class="header-logo" src="https://cdn.freebiesupply.com/images/large/2x/premier-league-logo-black-and-white.png" alt="Premier League Logo" />  
+                </a>               
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="teams">TEAMS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">SEASONS</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </button>
-    <div class="collapse" id="{{teams.name}}">
-      <div class="card card-body">
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-title">Matches played</div>
-                <div class="stat-number">143</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Wins</div>
-                <div class="stat-number">90</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Losses</div>
-                <div class="stat-number">30</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Goals</div>
-                <div class="stat-number">100</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Goals Conceded</div>
-                <div class="stat-number">40</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Clean sheets</div>
-                <div class="stat-number">0</div>
-            </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
+        </nav>
+    </header>
+    {% for u in unique_names%}
+    <a class="btn btn-primary" href="graph/{{u}}/2006-2007" role="button">{{u}}</a>
+    {% endfor %}
     <script src="static/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

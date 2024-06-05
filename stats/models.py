@@ -16,18 +16,19 @@ class teamSeasonData(models.Model):
     goals = models.IntegerField()
     season = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
+    shots_att = models.IntegerField()
+    on_target_att = models.IntegerField()
+    woodwork = models.IntegerField()
     teamName = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return "Name: " + str(self.name) + " Wins: " + str(self.wins) + " losses: " + str(self.losses) + " goals: " + str(self.goals) + " Season: " + str(self.season)
+        return str(self.name) + ',' + str(self.wins) + ',' + str(self.losses) + ',' + str(self.goals) + ',' + str(self.season) +\
+                ',' + str(self.shots_att) + ',' + str(self.on_target_att) + ',' + str(self.woodwork) + ',' + str(self.teamName)
     
 
 class ExtraSeasonData(models.Model):
     yel_cards = models.IntegerField()
     red_cards = models.IntegerField()
-    shots_att = models.IntegerField()
-    on_target_att = models.IntegerField()
-    woodwork = models.IntegerField()
     header_goals = models.IntegerField()
     penalty_goals = models.IntegerField()
     freekick_goals = models.IntegerField()
@@ -55,7 +56,8 @@ class ExtraSeasonData(models.Model):
     teamName = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return "Yellow Cards: " + str(self.yel_cards) + " Red Cards: " + str(self.red_cards) \
+        return "Name: " + str(self.teamName) +  \
+            "Yellow Cards: " + str(self.yel_cards) + " Red Cards: " + str(self.red_cards) \
             + " Shots Att: " + str(self.shots_att) + " On Target Att: " + str(self.on_target_att) + \
             " Woodwork: " + str(self.woodwork) + " Header Goals: " + str(self.header_goals) + " Penalty Goals: " \
             + str(self.penalty_goals) + " Freekick Goals: " + str(self.freekick_goals) + " Ibox Goals: " + str(self.ibox_goals) \

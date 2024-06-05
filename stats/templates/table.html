@@ -8,6 +8,31 @@
     <title>TP PREMIER LEAGUE</title>
     <link href="static/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="static/style.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .test {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        table, th, td{
+            border: 1px solid white;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        th{
+            background-color: #0c00f5;
+            color: white;
+        }
+        
+        select {
+            width: 200px;
+        }
+    </style>
 
 </head>
 
@@ -15,7 +40,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
              <div class="container-fluid">
-                <a href="index()" class="logoContainer">
+                <a href="" class="logoContainer">
                     <img class="header-logo" src="https://cdn.freebiesupply.com/images/large/2x/premier-league-logo-black-and-white.png" alt="Premier League Logo" />  
                 </a>               
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +49,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index()">HOME</a>
+                            <a class="nav-link active" aria-current="page" href="">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="graph()">TEAMS</a>
+                            <a class="nav-link" href="teams">TEAMS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">SEASONS</a>
@@ -36,34 +61,20 @@
                 </div>
             </div>
         </nav>
-    </head>
+    </header>
     <title>TEAM TABLE</title>
     <body>
-        <b>Search the table:
-            <input id="entireSearch" type="text" placeholder="Search here">
-        </b>
-        <b>Search specific column:
-            <select id="columnSelect">
-                <option value="all">All Columns</option>
-                <option value="TEAM">TEAM</option>
-                <option value="WINS">WINS</option>
-                <option value="LOSSES">LOSSES</option>
-                <option value="GOALS">GOALS</option>
-                <option value="SEASON">SEASON</option>
-            </select>
-            <input id="columnSearch" type="text" placeholder="Search here">
-        </input>
-        </b>
+        <div class="filters">
+        <table id="teams-table">
 
-        <table>
             <thead>
-                <tr>
-                    <th class="header-row" >TEAM</th>
-                    <th class="header-row" >WINS</th>
-                    <th class="header-row">LOSSES</th>
-                    <th class="header-row">GOALS</th>
-                    <th class="header-row">SEASON</th>
-                </tr>
+                    <tr>
+                        <th class="filter">TEAM</th>
+                        <th class="filter">WINS</th>
+                        <th class="filter">LOSSES</th>
+                        <th class="filter">GOALS</th>
+                        <th class="filter">SEASON</th>
+                    </tr>
             </thead>
             <tbody id="geeks">
                 {% for team in teamName %}
@@ -77,38 +88,10 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="static/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function () {
-                $("#entireSearch, #columnSearch").on("keyup", function () {
-                    let entireValue = $("#entireSearch").val().toLowerCase();
-                    let columnValue = $("#columnSearch").val().toLowerCase();
-                    let selectedColumn = $("#columnSelect").val();
-    
-                    $("#geeks tr").each(function () {
-                        let rowText = $(this).text().toLowerCase();
-                        // Show all rows if entire search is empty
-                        let matchEntire = entireValue === ""; 
-    
-                        if (entireValue !== "") {
-                            matchEntire = rowText.indexOf(entireValue) > -1;
-                        }
-                        // Assuming all rows initially match column search
-                        let matchColumn = true; 
-                        if (selectedColumn !== "all" && columnValue !== "") {
-                            let columnData = $(this).find("td:nth-child(" + 
-                            (selectedColumn === "TEAM" ? 1 : 
-                             (selectedColumn === "SEASON" ? 5 : 6)) +
-                             ")").text().toLowerCase();
-                            matchColumn = columnData.indexOf(columnValue) > -1;
-                        }
-    
-                        $(this).toggle(matchEntire && matchColumn);
-                    });
-                });
-            });
-        </script>
+        <script src="static/script.js"></script>
     </header>
 
 </body>
