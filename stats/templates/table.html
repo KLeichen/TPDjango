@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
              <div class="container-fluid">
-                <a href=" http://premier" class="logoContainer">
+                <a href="index()" class="logoContainer">
                     <img class="header-logo" src="https://cdn.freebiesupply.com/images/large/2x/premier-league-logo-black-and-white.png" alt="Premier League Logo" />  
                 </a>               
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                            <a class="nav-link active" aria-current="page" href="index()">HOME</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="graph()">TEAMS</a>
@@ -39,6 +39,22 @@
     </head>
     <title>TEAM TABLE</title>
     <body>
+        <b>Search the table:
+            <input id="entireSearch" type="text" placeholder="Search here">
+        </b>
+        <b>Search specific column:
+            <select id="columnSelect">
+                <option value="all">All Columns</option>
+                <option value="TEAM">TEAM</option>
+                <option value="WINS">WINS</option>
+                <option value="LOSSES">LOSSES</option>
+                <option value="GOALS">GOALS</option>
+                <option value="SEASON">SEASON</option>
+            </select>
+            <input id="columnSearch" type="text" placeholder="Search here">
+        </input>
+        </b>
+
         <table>
             <thead>
                 <tr>
@@ -49,7 +65,7 @@
                     <th class="header-row">SEASON</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="geeks">
                 {% for team in teamName %}
                 <tr>
                     <td>{{ team.name }}</td>
@@ -61,34 +77,38 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-title">Matches played</div>
-                <div class="stat-number">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Wins</div>
-                <div class="stat-number">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Losses</div>
-                <div class="stat-number">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Goals</div>
-                <div class="stat-number">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Goals Conceded</div>
-                <div class="stat-number">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Clean sheets</div>
-                <div class="stat-number">0</div>
-            </div>
-        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="static/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+        <script>
+            $(document).ready(function () {
+                $("#entireSearch, #columnSearch").on("keyup", function () {
+                    let entireValue = $("#entireSearch").val().toLowerCase();
+                    let columnValue = $("#columnSearch").val().toLowerCase();
+                    let selectedColumn = $("#columnSelect").val();
+    
+                    $("#geeks tr").each(function () {
+                        let rowText = $(this).text().toLowerCase();
+                        // Show all rows if entire search is empty
+                        let matchEntire = entireValue === ""; 
+    
+                        if (entireValue !== "") {
+                            matchEntire = rowText.indexOf(entireValue) > -1;
+                        }
+                        // Assuming all rows initially match column search
+                        let matchColumn = true; 
+                        if (selectedColumn !== "all" && columnValue !== "") {
+                            let columnData = $(this).find("td:nth-child(" + 
+                            (selectedColumn === "TEAM" ? 1 : 
+                             (selectedColumn === "SEASON" ? 5 : 6)) +
+                             ")").text().toLowerCase();
+                            matchColumn = columnData.indexOf(columnValue) > -1;
+                        }
+    
+                        $(this).toggle(matchEntire && matchColumn);
+                    });
+                });
+            });
+        </script>
     </header>
 
 </body>

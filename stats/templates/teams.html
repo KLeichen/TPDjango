@@ -5,23 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet %}" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="static/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="static/style.css">
     <title> Teams Cards </title>
 </head>
 
 <body>
     {% for teams in team %}
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="Mancity" aria-expanded="false" aria-controls="Mancity">
-        <div class="team-card man-city">
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{teams.name}}" aria-expanded="false" aria-controls="{{teams.name}}">
+        <div class="team-card">
             <div class="card-content">
                 <div class="team-name">{{teams.name}}</div>
-                <p>{{img_link}}</p>
                 {% comment %} <img src="{{ img_link }}" alt="{{teams.name}}" class="team-logo"> {% endcomment %}
             </div>
         </div>
     </button>
-    <div class="collapse" id="Mancity">
+    <div class="collapse" id="{{teams.name}}">
       <div class="card card-body">
         <div class="stats-container">
             <div class="stat-card">

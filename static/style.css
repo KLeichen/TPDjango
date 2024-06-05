@@ -162,18 +162,7 @@ thead tr {
     height: 80px;
     margin: 20px 0;
 }
-.team-card.man-city {
-    background-color: #6CABDD;
-}
-.team-card.crystal-palace {
-    background-color: #1B458F;
-}
-.team-card.arsenal {
-    background-color: #EF0107;
-}
-.team-card.sheffield-utd {
-    background-color: #EE2737;
-}
+
 .btn {
     background: none;
     border: none;

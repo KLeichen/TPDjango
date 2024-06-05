@@ -4,5 +4,6 @@ from stats import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("<str:team_name>", views.graph, name="graph"),
+    path("table", views.table, name="table"),
+    path("teams", views.teams, name="teams"),
 ]
