@@ -32,6 +32,11 @@
         select {
             width: 200px;
         }
+
+        .graph-getter{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 
 </head>
@@ -79,7 +84,7 @@
             <tbody id="geeks">
                 {% for team in teamName %}
                 <tr>
-                    <td>{{ team.name }}</td>
+                    <td><a class="graph-getter" href="/graph/{{team.name}}/{{team.season}}">{{ team.name }}<a/></td>
                     <td>{{ team.wins }}</td>
                     <td>{{ team.losses }}</td>
                     <td>{{ team.goals }}</td>

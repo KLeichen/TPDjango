@@ -62,9 +62,4 @@ def run():
                         teamName=club_name)
             extra_data.save()
 
-            img_links = ImageLinks(
-                name = name_link)
-
-            img_links.save()
-
 

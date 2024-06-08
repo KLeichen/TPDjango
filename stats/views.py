@@ -18,8 +18,9 @@ def index(request):
 def teams(request):
     teamName = teamSeasonData.objects.all()
     team = clubName.objects.all()
-    img_link = ImageLinks.objects.all()
+    img_link = list(ImageLinks.objects.values_list())
     unique_names = list(team.values_list('name', flat=True).distinct())
+    img_link = img_link[0][1]
     context = {
         "team": team,
         "img_link": img_link,
@@ -105,7 +106,6 @@ def graph(request, teamName, season):
     buf.seek(0)
     string = base64.b64encode(buf.read())
     uri =  urllib.parse.quote(string)
-
     context = {
         "shots_att": shots_att,
         "woodwork": woodwork,

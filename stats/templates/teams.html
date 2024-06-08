@@ -33,9 +33,44 @@
             </div>
         </nav>
     </header>
-    {% for u in unique_names%}
-    <a class="btn btn-primary" href="graph/{{u}}/2006-2007" role="button">{{u}}</a>
-    {% endfor %}
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="Mancity" aria-expanded="false" aria-controls="Mancity">
+        <div class="team-card man-city">
+            <div class="card-content">
+                <div class="team-name">Manchester United</div>
+                <img src="{{img_link}}"  class="team-logo">
+            </div>
+        </div>
+    </button>
+    <div class="collapse" id="Mancity">
+    <div class="card card-body">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-title">Matches played</div>
+                <div class="stat-number">143</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Wins</div>
+                <div class="stat-number">90</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Losses</div>
+                <div class="stat-number">30</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Goals</div>
+                <div class="stat-number">100</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Goals Conceded</div>
+                <div class="stat-number">40</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Clean sheets</div>
+                <div class="stat-number">0</div>
+            </div>
+    </div>
+    </div>
+</div>
     <script src="static/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
