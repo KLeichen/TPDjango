@@ -8,6 +8,8 @@ import urllib3
 from stats.models import clubName, teamSeasonData, ExtraSeasonData, ImageLinks
 import matplotlib.pyplot as plt
 import random
+from django.db.models import Sum
+
 
 # Create your views here.
 def index(request):
@@ -16,17 +18,25 @@ def index(request):
 
 
 def teams(request):
+    goals = []
+    team_x_url = [{}]
     teamName = teamSeasonData.objects.all()
     team = clubName.objects.all()
     img_link = list(ImageLinks.objects.values_list())
     unique_names = list(team.values_list('name', flat=True).distinct())
-    img_link = img_link[0][1]
+    names_no_spaces = [name.replace(" ", "") for name in unique_names]
+    team = list(clubName.objects.all())
+    images = ImageLinks.objects.select_related('club').all()
+    test = {image.club.name.replace(" ", ""): image.image_link for image in images}
+    print(test)
     context = {
         "team": team,
-        "img_link": img_link,
+        "url": img_link,
         "teamName": teamName,
-        'unique_names': unique_names
-    }
+        'unique_names': names_no_spaces,
+        'goals': goals,
+        'test': test,
+        }
     return render(request,'teams.html', context)
 
 
@@ -37,6 +47,7 @@ def table(request):
     losses = season
     team = season
     teamName = season
+    goals = season
     unique_seasons = list(season.values_list('season', flat=True).distinct())
     
     context = {
@@ -46,7 +57,8 @@ def table(request):
         "teamName": teamName,
         "losses": losses,
         'season': season,
-        'unique_season': unique_seasons
+        'unique_season': unique_seasons,
+        'goals': goals
     }
     return render(request,'table.html', context)
 

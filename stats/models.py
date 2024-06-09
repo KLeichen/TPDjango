@@ -71,7 +71,7 @@ class ExtraSeasonData(models.Model):
     
 
 class ImageLinks(models.Model):
-    image_link = models.URLField(max_length=255)
+    image_link = models.CharField(max_length=255)
     club = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
