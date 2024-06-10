@@ -1,4 +1,5 @@
 import base64
+from collections import defaultdict
 import io
 import urllib
 from django.http import HttpResponse
@@ -18,28 +19,63 @@ def index(request):
 
 
 def teams(request):
-    goals = []
-    team_x_url = [{}]
     teamName = teamSeasonData.objects.all()
+    images = ImageLinks.objects.select_related('club').all()
+    logos = {image.club.name.replace(" ", ""): image.image_link for image in images}
+    team_stats = teamSeasonData.objects.values('name', 'season').annotate(
+    total_goals=Sum('goals'),
+    total_wins=Sum('wins'),
+    total_losses=Sum('losses')
+)
+
+    # Create a dictionary with each team's name and its statistics for each season
+    team_season_stats = defaultdict(lambda: {'goals': 0, 'wins': 0, 'losses': 0})
+    team_total_stats = defaultdict(lambda: {'goals': 0, 'wins': 0, 'losses': 0})
+
+    for entry in team_stats:
+        team_name = entry['name']
+        season_goals = entry['total_goals']
+        season_wins = entry['total_wins']
+        season_losses = entry['total_losses']
+        team_season_stats[team_name][entry['season']] = {
+            'goals': season_goals,
+            'wins': season_wins,
+            'losses': season_losses
+    }
+        team_total_stats[team_name]['goals'] += season_goals
+        team_total_stats[team_name]['wins'] += season_wins
+        team_total_stats[team_name]['losses'] += season_losses
+    team_total_stats_all_seasons = dict(team_total_stats)
+    merged_dict = {}
+
+    for team, stats in team_total_stats_all_seasons.items():
+        team_key = team.replace(" ", "")  # Remove spaces from team name
+        if team_key in logos:
+            merged_dict[team_key] = {'stats': stats, 'image_link': logos[team_key]}
+        else:
+            merged_dict[team_key] = {'stats': stats, 'image_link': None}
+
+# Add remaining entries from test
+    for team, image_link in logos.items():
+        team_key = team.replace(" ", "")  # Remove spaces from team name
+        if team_key not in merged_dict:
+            merged_dict[team_key] = {'stats': None, 'image_link': image_link}
+    goals = list(teamSeasonData.objects.values_list('goals', flat=True))
     team = clubName.objects.all()
     img_link = list(ImageLinks.objects.values_list())
     unique_names = list(team.values_list('name', flat=True).distinct())
     names_no_spaces = [name.replace(" ", "") for name in unique_names]
     team = list(clubName.objects.all())
-    images = ImageLinks.objects.select_related('club').all()
-    test = {image.club.name.replace(" ", ""): image.image_link for image in images}
-    print(test)
     context = {
         "team": team,
         "url": img_link,
         "teamName": teamName,
         'unique_names': names_no_spaces,
         'goals': goals,
-        'test': test,
+        'logos': logos,
+        'test': merged_dict,
         }
     return render(request,'teams.html', context)
-
-
 def table(request):
     name = clubName.objects.all()
     season = teamSeasonData.objects.all()

@@ -75,5 +75,5 @@ class ImageLinks(models.Model):
     club = models.ForeignKey(clubName, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return str(self.club)
+        return str(self.club) + " Logo"
 

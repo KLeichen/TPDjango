@@ -33,12 +33,12 @@
             </div>
         </nav>
     </header>
-    {%for team, img_link in test.items%}
+    {%for team, data in test.items%}
     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{team}}" aria-expanded="false" aria-controls="{{team}}">
         <div class="team-card man-united">
             <div class="card-content">
                 <div class="team-name">{{team}}</div>
-                <img src="{{img_link}}"  class="team-logo">
+                <img src="{{data.image_link}}"  class="team-logo">
             </div>
         </div>
       </button>
@@ -47,27 +47,15 @@
                 <div class="stats-container">
                     <div class="stat-card">
                         <div class="stat-title">Goals</div>
-                        <div class="stat-number"></div>
+                        <div class="stat-number">{{data.stats.goals}}</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-title">Wins</div>
-                        <div class="stat-number">90</div>
+                        <div class="stat-number">{{data.stats.wins}}</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-title">Losses</div>
-                        <div class="stat-number">30</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Goals</div>
-                        <div class="stat-number">100</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Goals Conceded</div>
-                        <div class="stat-number">40</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Clean sheets</div>
-                        <div class="stat-number">0</div>
+                        <div class="stat-number">{{data.stats.losses}}</div>
                     </div>
             </div>
         </div>
