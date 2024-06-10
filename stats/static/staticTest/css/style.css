@@ -116,7 +116,7 @@ thead tr {
     width: 100%;
 }
 .team-card {
-    background-color: #080dff !important;
+    background-color: #f7f7fd !important;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     width: 400px;
@@ -179,6 +179,120 @@ thead tr {
 
 .NorwichCity{
     background-color: #167000 !important;
+}
+.AFCBournemouth{
+    background-color: #B50E12 !important;
+}
+.Arsenal{
+    background-color: #DB0007 !important;
+}
+.AstonVilla{
+    background-color: #95BFE5 !important;
+}
+.BirminghamCity{
+    background-color: #506ba1 !important;
+}
+.BlackburnRovers{
+    background-color: #009EE0 !important;
+}
+.Blackpool{
+    background-color: #f68e20 !important;
+}
+.BoltonWanderers{
+    background-color: #c1081e !important;
+}
+.BrightonandHoveAlbion{
+    background-color: #0057B8 !important;
+}
+.Burnley{
+    background-color: #6C1D45 !important;
+}
+.CardiffCity{
+    background-color: #0070B5 !important;
+}
+.CharltonAthletic{
+    background-color: #000000 !important;
+}
+.Chelsea{
+    background-color: #034694 !important;
+}
+.CrystalPalace{
+    background-color: #1B458F !important;
+}
+.DerbyCounty{
+    background-color: #000000 !important;
+}
+.Everton{
+    background-color: #003399 !important;
+}
+.Fulham{
+    background-color: #cc0000 !important;
+}
+.HuddersfieldTown{
+    background-color: #0E63AD !important;
+}
+.HullCity{
+    background-color: #F18A01 !important;
+}
+.LeicesterCity{
+    background-color: #fdbe11 !important;
+}
+.Liverpool{
+    background-color: #C8102E !important;
+}
+.ManchesterCity{
+    background-color: #6CABDD !important;
+}
+.Middlesbrough{
+    background-color: #DE1B22 !important;
+}
+.NewcastleUnited{
+    background-color: #241F20 !important;
+}
+.NorwichCity{
+    background-color: #167000 !important;
+}
+.Portsmouth{
+    background-color: #0000ff !important;
+}
+.QueensParkRangers{
+    background-color: #1d5ba4 !important;
+}
+.Reading{
+    background-color: #dd1740 !important;
+}
+.SheffieldUnited{
+    background-color: #eaa51b !important;
+}
+ .Southampton{
+    background-color: #D71920 !important;
+}
+.StokeCity{
+    background-color: #1b449c !important;
+}
+.Sunderland{
+    background-color: #eb172b !important;
+}
+.SwanseaCity{
+    background-color: #585656b7 !important;
+}
+.TottenhamHotspur{
+    background-color: #132257 !important;
+}
+.Watford{
+    background-color: #fbee23 !important;
+}
+.WestBromwichAlbion{
+    background-color: #018b4b !important;
+}
+.WestHamUnited{
+    background-color: #7a263a !important;
+}
+.WiganAthletic{
+    background-color: #9e8b4f !important;
+}
+.WolverhamptonWanderers{
+    background-color: #fdb913 !important;
 }
 
 .graph{
