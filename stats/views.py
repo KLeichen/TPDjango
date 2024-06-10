@@ -142,15 +142,18 @@ def graph(request, teamName, season):
         else:
             outX.append(a)
             outY.append(y)
-    im = plt.imread('/Users/kevo/HTML/Git Repo/TPDjango/stats/templates/SoccerGoal.jpeg')
+    im = plt.imread('stats/templates/SoccerGoal.jpeg')
     implot = plt.imshow(im)
     plt.scatter(inX, inY, marker='x', color='red', label='Goals')
     plt.scatter(woodX, woodY, marker='o', color='black', label='Woodwork')
     plt.scatter(outX, outY, label='Missed')
     plt.legend()
+    plt.axis('off')
+    plt.rcParams["figure.figsize"] = [9.00, 4.50]
+    plt.rcParams["figure.autolayout"] = True
     fig = plt.gcf()
     buf = io.BytesIO()
-    fig.savefig(buf,format='png')
+    fig.savefig(buf,format='png' , bbox_inches='tight', pad_inches=0.0)
     buf.seek(0)
     string = base64.b64encode(buf.read())
     uri =  urllib.parse.quote(string)
