@@ -305,3 +305,94 @@ thead tr {
     display: flex !important;
     justify-content: center !important;
 }
+
+.stats{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.stats img{
+    width: 200px;
+    height: 500px;
+}
+.stats-container{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.stats-container img{
+    margin: 0;
+    border: 0.2rem solid #fff;
+    border-radius: 2rem;
+    padding: 0.4em;
+    box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #bc13fe,
+                0 0 0.8rem #bc13fe,
+                0 0 2.8rem #bc13fe,
+                inset 0 0 1.3rem #bc13fe; 
+    width: 300px;
+    height: 480px;
+}
+
+.stats-container img:hover {
+    transition: 1.5s;
+    transform: scale(1.05);
+}
+
+.stats-info {
+    margin-top: 27px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.stats-card h2 {
+    text-align: center;
+    font-weight: 10px;
+    margin-bottom: 20px;
+}
+.statistics {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 0.5em;
+    background-color:rgb(138, 12, 207); 
+    color: #fff;
+    margin-top: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.statistics:hover {
+    background-color: #3b033b; 
+}
+
+ul {
+    list-style: none;
+}
+
+footer{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll;
+}
+
+footer img{
+    margin: 40px;
+    width: 250px;
+    height: 100px;
+}
