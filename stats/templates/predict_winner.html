@@ -1,0 +1,10 @@
+{% block content %}
+<h2>Prediction for Season {{ next_season }}</h2>
+{% if predicted_winner %}
+<p>The predicted winner for season {{ next_season }} is <strong>{{ predicted_winner }}</strong>.</p>
+<p>{{ team_performance }} wins in season {{ selected_season }}.</p>
+{% else %}
+<p>No data available to predict the winner for season {{ next_season }}.</p>
+{% endif %}
+<a href="{% url 'predict_next_season_winner' %}">Try another season</a>
+{% endblock %}

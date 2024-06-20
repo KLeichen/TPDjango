@@ -1,0 +1,13 @@
+{% block content %}
+<h2>Select a Season to Predict the Next Winner</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="season">Choose a season:</label>
+    <select name="season" id="season">
+        {% for season in seasons %}
+        <option value="{{ season }}">{{ season }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Predict Winner</button>
+</form>
+{% endblock %}

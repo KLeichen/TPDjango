@@ -9,7 +9,10 @@ import urllib3
 from stats.models import clubName, teamSeasonData, ExtraSeasonData, ImageLinks
 import matplotlib.pyplot as plt
 import random
-from django.db.models import Sum
+from django.db.models import Sum, Max
+from .tables import TeamTable
+from .filters import TeamFilter
+import django_tables2 as tables
 
 
 # Create your views here.
@@ -76,6 +79,7 @@ def teams(request):
         'test': merged_dict,
         }
     return render(request,'teams.html', context)
+
 def table(request):
     name = clubName.objects.all()
     season = teamSeasonData.objects.all()
@@ -170,3 +174,68 @@ def graph(request, teamName, season):
         'data' : uri
     }
     return render(request,'graph.html', context)
+
+
+def predict_next_season_winner(request):
+    if request.method == 'POST':
+        selected_season = request.POST.get('season')
+        season_parts = selected_season.split('-')
+        next_season = f"{int(season_parts[0]) + 1}-{int(season_parts[1]) + 1}"
+
+        # Find the team with the most wins in the selected season
+        best_team_selected_season = teamSeasonData.objects.filter(season=selected_season).order_by('-wins').first()
+
+        # Assuming the best team of the selected season could be the winner of the next season
+        predicted_winner = best_team_selected_season.name if best_team_selected_season else None
+
+        context = {
+            'predicted_winner': predicted_winner,
+            'selected_season': selected_season,
+            'next_season': next_season,
+            'team_performance': best_team_selected_season.wins if best_team_selected_season else 0
+        }
+        return render(request, 'predict_winner.html', context)
+    else:
+        # Get all available seasons to populate the dropdown
+        seasons = teamSeasonData.objects.values_list('season', flat=True).distinct()
+        seasons = sorted(seasons)
+        context = {
+            'seasons': seasons
+        }
+        return render(request, 'select_season.html', context)
+
+
+from django.shortcuts import render
+from .models import teamSeasonData
+from django.db.models import Sum
+
+def team_performance_ratios(request, team_name):
+    season = request.GET.get('season', None)  # Get season from GET request, default is None
+
+    if season:
+        team_data = teamSeasonData.objects.filter(name=team_name, season=season)
+    else:
+        team_data = teamSeasonData.objects.filter(name=team_name)
+
+    total_wins = team_data.aggregate(Sum('wins'))['wins__sum'] or 0
+    total_losses = team_data.aggregate(Sum('losses'))['losses__sum'] or 0
+    total_goals = team_data.aggregate(Sum('goals'))['goals__sum'] or 0
+
+    win_loss_ratio = total_wins / total_losses if total_losses else float('inf')
+    goals_to_wins_ratio = total_goals / total_wins if total_wins else 0
+
+    context = {
+        'team_name': team_name,
+        'season': season if season else 'All Seasons',
+        'win_loss_ratio': win_loss_ratio,
+        'goals_to_wins_ratio': goals_to_wins_ratio,
+        'seasons': teamSeasonData.objects.filter(name=team_name).values_list('season', flat=True).distinct(),
+    }
+    return render(request, 'team_performance_ratios.html', context)
+
+def team_list(request):
+    filter = TeamFilter(request.GET, queryset=teamSeasonData.objects.all())
+    table = TeamTable(filter.qs)
+    tables.RequestConfig(request).configure(table)
+    return render(request, 'team_list.html', {'table': table, 'filter': filter})
+

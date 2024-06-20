@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Team Performance Ratios</title>
+</head>
+<body>
+    <h1>Performance Ratios for {{ team_name }} - {{ season }}</h1>
+    <p>Win-Loss Ratio: {{ win_loss_ratio }}</p>
+    <p>Goals to Wins Ratio: {{ goals_to_wins_ratio }}</p>
+
+    <form action="{% url 'team_performance_ratios' team_name=team_name %}" method="get">
+        <select name="season">
+            <option value="">All Seasons</option>
+            {% for s in seasons %}
+            <option value="{{ s }}" {% if s == season %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
