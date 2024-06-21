@@ -224,11 +224,20 @@ def team_performance_ratios(request, team_name):
     win_loss_ratio = total_wins / total_losses if total_losses else float('inf')
     goals_to_wins_ratio = total_goals / total_wins if total_wins else 0
 
+    # Calculate averages
+    num_seasons = team_data.values('season').distinct().count()
+    average_wins = total_wins / num_seasons if num_seasons else 0
+    average_losses = total_losses / num_seasons if num_seasons else 0
+    average_goals = total_goals / num_seasons if num_seasons else 0
+
     context = {
         'team_name': team_name,
         'season': season if season else 'All Seasons',
         'win_loss_ratio': win_loss_ratio,
         'goals_to_wins_ratio': goals_to_wins_ratio,
+        'average_wins': average_wins,
+        'average_losses': average_losses,
+        'average_goals': average_goals,
         'seasons': teamSeasonData.objects.filter(name=team_name).values_list('season', flat=True).distinct(),
     }
     return render(request, 'team_performance_ratios.html', context)

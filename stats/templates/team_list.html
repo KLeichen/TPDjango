@@ -39,6 +39,33 @@
             top: 10px;
             left: 10px;
         }
+        .filter-form {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #9d00ff;
+        }
+        .filter-form input, .filter-form select {
+            background-color: #000;
+            border: 1px solid #5e00ff;
+            color: #d3d3d3;
+            padding: 8px;
+            border-radius: 4px;
+            width: calc(100% - 20px);
+        }
+        .filter-form button {
+            background-color: #5e00ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 0 5px #9d00ff;
+            transition: background-color 0.3s;
+        }
+        .filter-form button:hover {
+            background-color: #7b00ff;
+        }
         .pagination {
             display: flex;
             list-style: none;
@@ -51,15 +78,24 @@
         .pagination a:hover {
             background-color: #eee;
         }
+        .filter-form .clear-btn {
+            background-color: #444;
+            color: #ccc;
+            margin-left: 10px;
+        }
+        .filter-form .clear-btn:hover {
+            background-color: #666;
+        }
     </style>
 </head>
 <body>
     <button class="openbtn" onclick="openNav()">☰ Open Filters</button>
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <form method="get">
+        <form method="get" class="filter-form">
             {{ filter.form.as_p }}
             <button type="submit">Search</button>
+            <button type="button" class="clear-btn" onclick="clearFilters()">Clear All</button>
         </form>
     </div>
     <div style="margin-left:250px;">
@@ -93,6 +129,12 @@
 
         function closeNav() {
             document.getElementById("mySidebar").style.width = "0";
+        }
+        function clearFilters() {
+            // This function will reset all form elements to their default values
+            var form = document.querySelector('.filter-form');
+            form.reset();
+            form.submit(); // Optionally submit the form after resetting
         }
     </script>
 </body>

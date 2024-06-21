@@ -6,6 +6,9 @@
     <h1>Performance Ratios for {{ team_name }} - {{ season }}</h1>
     <p>Win-Loss Ratio: {{ win_loss_ratio }}</p>
     <p>Goals to Wins Ratio: {{ goals_to_wins_ratio }}</p>
+    <p>Average Wins: {{ average_wins }}</p>
+    <p>Average Losses: {{ average_losses }}</p>
+    <p>Average Goals: {{ average_goals }}</p>
 
     <form action="{% url 'team_performance_ratios' team_name=team_name %}" method="get">
         <select name="season">
