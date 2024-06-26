@@ -5,11 +5,10 @@ class TeamTable(tables.Table):
     name = tables.Column(verbose_name='Team', accessor='name')
 
     def render_name(self, value, record):
-        url = f"/graph/{record.name}/{record.season}"
-        return f'<a href="{url}">{value}</a>'
+        return f'{value}'
 
     class Meta:
         model = teamSeasonData
-        template_name = 'django_tables2/bootstrap.html'
+        template_name = 'django_tables2/bootstrap5.html'
         fields = ('name', 'wins', 'losses', 'goals', 'season')
-        per_page = 10  # Set the number of items per page here
+        attrs = {"class": "django-tables2-table"}

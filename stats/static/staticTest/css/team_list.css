@@ -1,0 +1,212 @@
+/* Existing styles */
+.filter-form {
+    background-color: #2a2a2a !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 10px #9d00ff !important;
+}
+.filter-form input, .filter-form select {
+    background-color: #000 !important;
+    border: 1px solid #5e00ff !important;
+    color: #d3d3d3 !important;
+    padding: 8px !important;
+    border-radius: 4px !important;
+    width: calc(100% - 20px) !important;
+}
+.filter-form button {
+    background-color: #5e00ff !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    box-shadow: 0 0 5px #9d00ff !important;
+    transition: background-color 0.3s !important;
+}
+.filter-form button:hover {
+    background-color: #7b00ff !important;
+}
+.pagination {
+    display: flex !important;
+    list-style: none !important;
+}
+.pagination a, .pagination span {
+    padding: 5px 10px !important;
+    margin: 5px !important;
+    border: 1px solid #ddd !important;
+}
+.pagination a:hover {
+    background-color: #9b9b9b !important;
+}
+.filter-form .clear-btn {
+    background-color: #444 !important;
+    color: #ccc !important;
+    margin-left: 10px !important;
+}
+.filter-form .clear-btn:hover {
+    background-color: #666 !important;
+}
+
+.django-tables2-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    background-color: #2a2a2a !important; /* Dark background for contrast */
+}
+.django-tables2-table th, .django-tables2-table td {
+    border: 1px solid #5e00ff !important; /* Neon purple borders */
+    text-align: left !important;
+    padding: 8px !important;
+    color: #d3d3d3 !important; /* Light text for readability */
+}
+.django-tables2-table th {
+    background-color: #4a148c !important; /* Slightly darker purple for headers */
+}
+.django-tables2-table tr:nth-child(even) {
+    background-color: #32174d !important; /* Alternating row colors */
+}
+.django-tables2-table tr:hover {
+    background-color: #5e00ff !important; /* Hover effect with brighter purple */
+}
+.django-tables2-table a {
+    color: #b39ddb !important; /* Links styled with a lighter purple */
+    text-decoration: none !important;
+}
+.django-tables2-table a:hover {
+    color: #ce93d8 !important; /* Lighter purple on hover for links */
+}
+
+/* New styles */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+.table-container {
+    margin: 0 auto;
+    width: 95%;
+    overflow-x: auto;
+}
+
+.django-tables2-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+    background-color: #2e004f;
+}
+
+.django-tables2-table th, .django-tables2-table td {
+    border: 1px solid #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+.django-tables2-table th {
+    background-color: #4b0082;
+    color: #fff;
+}
+
+.django-tables2-table tr:nth-child(even) {
+    background-color: #3b0066;
+}
+
+.django-tables2-table tr:hover {
+    background-color: #5e00a3;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #4b0082;
+    border: 1px solid #4b0082;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #4b0082;
+    color: white;
+}
+
+.pagination .current {
+    background-color: #4b0082;
+    color: white;
+    border: 1px solid #4b0082;
+}
+
+.table-container {
+    margin-left: 0;
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+        overflow-x: auto; /* Ensure horizontal scrolling on smaller screens */
+    }
+    table {
+        font-size: 14px; /* Increase font size for better readability on phones */
+    }
+    th, td {
+        padding: 10px; /* Increase padding for better touch targets */
+    }
+}

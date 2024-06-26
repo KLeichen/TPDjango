@@ -1,3 +1,4 @@
+from django_tables2.config import RequestConfig
 import base64
 from collections import defaultdict
 import io
@@ -13,6 +14,8 @@ from django.db.models import Sum, Max
 from .tables import TeamTable
 from .filters import TeamFilter
 import django_tables2 as tables
+from django.core.paginator import Paginator
+
 
 
 # Create your views here.
@@ -205,10 +208,6 @@ def predict_next_season_winner(request):
         return render(request, 'select_season.html', context)
 
 
-from django.shortcuts import render
-from .models import teamSeasonData
-from django.db.models import Sum
-
 def team_performance_ratios(request, team_name):
     season = request.GET.get('season', None)  # Get season from GET request, default is None
 
@@ -243,8 +242,16 @@ def team_performance_ratios(request, team_name):
     return render(request, 'team_performance_ratios.html', context)
 
 def team_list(request):
-    filter = TeamFilter(request.GET, queryset=teamSeasonData.objects.all())
+    data = teamSeasonData.objects.all()
+    filter = TeamFilter(request.GET, queryset=data)
     table = TeamTable(filter.qs)
-    tables.RequestConfig(request).configure(table)
-    return render(request, 'team_list.html', {'table': table, 'filter': filter})
+    
+    # Configure the table to be sortable and paginated
+    RequestConfig(request, paginate={'per_page': 15}).configure(table)
+    
+    return render(request, 'team_list.html', {
+        'table': table,
+        'filter': filter,
+    })
+
 

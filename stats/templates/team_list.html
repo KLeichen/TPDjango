@@ -1,96 +1,15 @@
 {% load django_tables2 %}
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Team List</title>
     <link href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" rel="stylesheet">
-    <style>
-        .sidebar {
-            width: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #111;
-            color: white;
-            border: none;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .filter-form {
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #9d00ff;
-        }
-        .filter-form input, .filter-form select {
-            background-color: #000;
-            border: 1px solid #5e00ff;
-            color: #d3d3d3;
-            padding: 8px;
-            border-radius: 4px;
-            width: calc(100% - 20px);
-        }
-        .filter-form button {
-            background-color: #5e00ff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 0 5px #9d00ff;
-            transition: background-color 0.3s;
-        }
-        .filter-form button:hover {
-            background-color: #7b00ff;
-        }
-        .pagination {
-            display: flex;
-            list-style: none;
-        }
-        .pagination a, .pagination span {
-            padding: 5px 10px;
-            margin: 5px;
-            border: 1px solid #ddd;
-        }
-        .pagination a:hover {
-            background-color: #eee;
-        }
-        .filter-form .clear-btn {
-            background-color: #444;
-            color: #ccc;
-            margin-left: 10px;
-        }
-        .filter-form .clear-btn:hover {
-            background-color: #666;
-        }
-    </style>
+    <link href="{% static 'staticTest/css/team_list.css' %}" rel="stylesheet">
 </head>
 <body>
-    <button class="openbtn" onclick="openNav()">☰ Open Filters</button>
-    <div id="mySidebar" class="sidebar">
+    <div class="sidebar" id="mySidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <form method="get" class="filter-form">
             {{ filter.form.as_p }}
@@ -98,30 +17,11 @@
             <button type="button" class="clear-btn" onclick="clearFilters()">Clear All</button>
         </form>
     </div>
-    <div style="margin-left:250px;">
+    <button class="openbtn" onclick="openNav()">☰ Open Filters</button>
+    <div class="table-responsive">
         <h1>Team List</h1>
         {% render_table table %}
-        <div class="pagination">
-            {% if table.page.has_previous %}
-                <a href="?page=1">First</a>
-                <a href="?page={{ table.page.previous_page_number }}">Previous</a>
-            {% endif %}
-            {% for num in table.page.paginator.page_range %}
-                {% if num > table.page.number|add:'-2' and num < table.page.number|add:'4' %}
-                    {% if table.page.number == num %}
-                        <span class="current">{{ num }}</span>
-                    {% else %}
-                        <a href="?page={{ num }}">{{ num }}</a>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            {% if table.page.has_next %}
-                <a href="?page={{ table.page.next_page_number }}">Next</a>
-                <a href="?page={{ table.page.paginator.num_pages }}">Last</a>
-            {% endif %}
-        </div>
     </div>
-
     <script>
         function openNav() {
             document.getElementById("mySidebar").style.width = "250px";
@@ -131,10 +31,7 @@
             document.getElementById("mySidebar").style.width = "0";
         }
         function clearFilters() {
-            // This function will reset all form elements to their default values
-            var form = document.querySelector('.filter-form');
-            form.reset();
-            form.submit(); // Optionally submit the form after resetting
+            window.location.href = "{% url 'team_list' %}";
         }
     </script>
 </body>
