@@ -152,11 +152,6 @@ thead tr {
     margin: 0;
     font-weight: bold;
 }
-.team-card .stadium-name {
-    font-size: 20px;
-    color: #eee;
-    margin: 0;
-}
 .team-card .team-logo {
     width: 80px;
     height: 80px;
@@ -395,4 +390,11 @@ footer img{
     margin: 40px;
     width: 250px;
     height: 100px;
+}
+
+.stat-card .stat-number a{
+    text-decoration: none;
+    font-size: 32px;
+    color: #4b0082; 
+    font-weight: bold;
 }

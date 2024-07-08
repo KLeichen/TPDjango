@@ -101,7 +101,7 @@ def table(request):
         "losses": losses,
         'season': season,
         'unique_season': unique_seasons,
-        'goals': goals
+        'goals': goals,
     }
     return render(request,'table.html', context)
 

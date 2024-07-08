@@ -9,6 +9,6 @@ class TeamTable(tables.Table):
 
     class Meta:
         model = teamSeasonData
-        template_name = 'django_tables2/bootstrap5.html'
+        template_name = 'django_tables2/bootstrap5-responsive.html'
         fields = ('name', 'wins', 'losses', 'goals', 'season')
         attrs = {"class": "django-tables2-table"}
