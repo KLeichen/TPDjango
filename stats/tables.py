@@ -4,7 +4,7 @@ from .models import teamSeasonData
 class TeamTable(tables.Table):
     name = tables.Column(verbose_name='Team', accessor='name')
 
-    def render_name(self, value, record):
+    def render_name(self, value):
         return f'{value}'
 
     class Meta:

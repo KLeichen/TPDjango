@@ -64,14 +64,13 @@ thead tr {
 
 .stats-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center, space-around;
     align-items: center;
     flex-wrap: wrap;
     max-width: 1200px;
     width: 100%;
 } 
 .stat-card {
-    background-color: rgb(255, 255, 255) !important;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
