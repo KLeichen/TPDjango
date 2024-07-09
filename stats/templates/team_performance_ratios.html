@@ -158,40 +158,43 @@
         }
     </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-             <div class="container-fluid">
-                <a href="/" class="logoContainer">
-                    <img class="header-logo" src="https://cdn.freebiesupply.com/images/large/2x/premier-league-logo-black-and-white.png" alt="Premier League Logo" />  
-                </a>               
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/teams">TEAMS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/team-list/">LEADERBOARDS</a>
-                        </li>
-                    </ul>
-                </div>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+         <div class="container-fluid">
+            <a href="/" class="logoContainer">
+                <img class="header-logo" src="https://cdn.freebiesupply.com/images/large/2x/premier-league-logo-black-and-white.png" alt="Premier League Logo" />  
+            </a>               
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/teams">TEAMS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/team-list/">LEADERBOARDS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/predict-winner/">PULPO PAUL</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+<body>
     {% if season %}
     <div class="ratios-container">
         <div class="ratios-card">
             <div class="ratios-info">
                 <h2>{{ team_name }} - {{ season }} </h2>
-                <p>Partidos Ganados sobre Perdidos: {{ win_loss_ratio }}</p>
-                <p> Promedio de Goles por Partido: {{ goals_per_match }}</p>
-                <p> Posicion: {{ position }}</p>
+                <p> Matches Won Over Losses: {{ win_loss_ratio }}</p>
+                <p> Average Goals per Match: {{ goals_per_match }}</p>
+                <p> Position: {{ position }}</p>
                 <form action="{% url 'team_performance_ratios' team_name=team_name %}" method="get">
                     <select name="season">
                         <option value="">All Seasons</option>
@@ -205,16 +208,16 @@
             <div class="graph">
                 <img src="data:image/png;base64,{{ data }}" alt="Gráfico de Rendimiento ">
                 <div>
-                <p>Tiros Fallidos: {{ shots_att }}</p>
-                <p>A los palos: {{ woodwork }}</p>
-                <p>Goles: {{ on_target }}</p>
+                <p>Failed Shots: {{ shots_att }}</p>
+                <p>On Woodwork: {{ woodwork }}</p>
+                <p>Goals: {{ on_target }}</p>
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
     <footer>
-        <p>&copy; 2024 Premier League Stats. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Premier League Stats. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

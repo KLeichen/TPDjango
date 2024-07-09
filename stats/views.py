@@ -304,5 +304,3 @@ def team_list(request):
         'table': table,
         'filter': filter,
     })
-
-
